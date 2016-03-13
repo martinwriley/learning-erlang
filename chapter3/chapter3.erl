@@ -1,5 +1,6 @@
+-module(chapter3).
 -export([sum/1, sum/2, create/1, reverse_create/1, print_numbers/1]).
--export([print_even_numbers/1, filter/2, filter_reverse/2, concatonate/1]).
+-export([print_even_numbers/1, filter/2, filter_reverse/2, concatenate/1]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Exported Functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -27,6 +28,8 @@ filter([_ | T], Max) -> filter(T, Max);
 filter([], _) -> []. 
 
 filter_reverse(Xs, Max) -> filter_reverse_acc(Xs, Max, []).
+
+concatenate(Ns) -> {error, notImpemented}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Private Functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
