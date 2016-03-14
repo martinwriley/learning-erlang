@@ -1,6 +1,7 @@
 -module(chapter3).
 -export([sum/1, sum/2, create/1, reverse_create/1, print_numbers/1]).
 -export([print_even_numbers/1, filter/2, filter_reverse/2, concatenate/1]).
+-export([flatten/1]).
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Exported Functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -29,8 +30,9 @@ filter([], _) -> [].
 
 filter_reverse(Xs, Max) -> filter_reverse_acc(Xs, Max, []).
 
-concatenate(Ns) -> {error, notImpemented}.
+concatenate(N) when is_list(N) ->  concatenate_acc(N, []).
 
+flatten(N) when is_list(N) ->  flatten_acc(N, []).
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Private Functions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -47,3 +49,13 @@ filter_reverse_acc([H | T], Max, Acc) when H =< Max ->
   filter_reverse_acc(T, Max, [H | Acc]);
 filter_reverse_acc([_ | T], Max, Acc) -> filter_reverse_acc(T, Max, Acc);
 filter_reverse_acc([], _, Acc) -> Acc.
+
+concatenate_acc([], Acc) -> Acc;
+concatenate_acc([H | T], Acc) ->  concatenate_acc(H, concatenate_acc(T,Acc));
+concatenate_acc(N, Acc) ->  [N | Acc].
+
+flatten_acc([H | T], Acc) when is_list(H) -> 
+  flatten_acc(H, flatten_acc(T, Acc));
+flatten_acc([], Acc) -> Acc;
+flatten_acc([H | T], Acc) ->  [H | flatten_acc(T, Acc)];
+flatten_acc(N, Acc) ->  [N | Acc].
